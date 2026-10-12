@@ -110,6 +110,8 @@ class ApiIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.bucketSeconds").value(5))
                 .andExpect(jsonPath("$.points.length()").value(60))
+                .andExpect(jsonPath("$.points[59].accepted").value(3))
+                .andExpect(jsonPath("$.points[59].rejected").value(3))
                 .andReturn().getResponse().getContentAsString();
         assertNotSecret(timeSeries);
 
@@ -123,6 +125,11 @@ class ApiIntegrationTest {
                 .andExpect(jsonPath("$.totalRequests").value(7))
                 .andExpect(jsonPath("$.acceptedRequests").value(4))
                 .andExpect(jsonPath("$.rejectedRequests").value(3));
+
+        mockMvc.perform(get("/api/monitoring/timeseries").header("X-Admin-Key", ADMIN_KEY))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.points[59].accepted").value(4))
+                .andExpect(jsonPath("$.points[59].rejected").value(3));
 
         mockMvc.perform(get("/actuator/health"))
                 .andExpect(status().isOk())
