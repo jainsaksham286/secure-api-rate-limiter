@@ -22,6 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE + 10)
+/** Authenticates demo/admin requests and applies the configured per-client token bucket. */
 public class ApiSecurityFilter extends OncePerRequestFilter {
     public static final String CLIENT_ATTRIBUTE = ApiSecurityFilter.class.getName() + ".client";
     public static final String DECISION_ATTRIBUTE = ApiSecurityFilter.class.getName() + ".decision";

@@ -15,7 +15,7 @@ public class WebConfig {
     FilterRegistrationBean<CorsFilter> corsFilter() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:8080", "http://127.0.0.1:8080"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Content-Type", "X-API-Key", "X-Admin-Key", "X-Request-Id"));
         configuration.setExposedHeaders(List.of(
                 "X-RateLimit-Limit", "X-RateLimit-Remaining", "X-RateLimit-Reset", "Retry-After", "X-Request-Id"));

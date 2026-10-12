@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:8080
+@freeKey = demo-key-free-123
+@proKey = demo-key-pro-456
+@adminKey = fake-admin-key-123
+
+### Public endpoint: unlimited, counted
+GET {{baseUrl}}/api/demo/public
+
+### Valid free key
+GET {{baseUrl}}/api/demo/data
+X-API-Key: {{freeKey}}
+
+### Valid pro key
+GET {{baseUrl}}/api/demo/data
+X-API-Key: {{proKey}}
+
+### Missing key
+GET {{baseUrl}}/api/demo/data
+
+### Invalid key
+GET {{baseUrl}}/api/demo/data
+X-API-Key: invalid-demo-key
+
+### Monitoring summary
+GET {{baseUrl}}/api/monitoring/summary
+X-Admin-Key: {{adminKey}}
+
+### Client statistics
+GET {{baseUrl}}/api/monitoring/clients
+X-Admin-Key: {{adminKey}}
+
+### Recent time series
+GET {{baseUrl}}/api/monitoring/timeseries
+X-Admin-Key: {{adminKey}}
+
+### Monitoring rejects a missing admin key
+GET {{baseUrl}}/api/monitoring/summary
+
+### Burst: run this request repeatedly to exhaust the bucket
+GET {{baseUrl}}/api/demo/data
+X-API-Key: {{freeKey}}
+
+### Health check
+GET {{baseUrl}}/actuator/health
