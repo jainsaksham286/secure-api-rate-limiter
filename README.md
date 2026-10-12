@@ -51,12 +51,9 @@ The `demo-free` profile starts with 5 tokens and refills at 1 token/second. A bu
 Java 17 is required. Maven is not required; the checked-in wrapper downloads Maven 3.9.11 on first use. Run these commands in PowerShell from the repository root:
 
 ```powershell
-.
-mvnw.cmd clean verify
-.
-mvnw.cmd package
-.
-mvnw.cmd spring-boot:run
+.\mvnw.cmd clean verify
+.\mvnw.cmd package
+.\mvnw.cmd spring-boot:run
 ```
 
 Open `http://localhost:8080`. To run the packaged application instead:
@@ -125,6 +122,8 @@ The captured reset value can vary with token refill timing. The executable examp
 | `app.rate-limit.clients.demo-free.capacity` | `5` | `APP_RATE_LIMIT_CLIENTS_DEMO_FREE_CAPACITY` |
 | `app.rate-limit.clients.demo-free.refill-tokens-per-second` | `1.0` | `APP_RATE_LIMIT_CLIENTS_DEMO_FREE_REFILL_TOKENS_PER_SECOND` |
 | `app.rate-limit.clients.demo-pro.api-key` | `demo-key-pro-456` | `DEMO_PRO_API_KEY` |
+| `app.rate-limit.clients.demo-pro.capacity` | `20` | `APP_RATE_LIMIT_CLIENTS_DEMO_PRO_CAPACITY` |
+| `app.rate-limit.clients.demo-pro.refill-tokens-per-second` | `5.0` | `APP_RATE_LIMIT_CLIENTS_DEMO_PRO_REFILL_TOKENS_PER_SECOND` |
 
 Spring Boot relaxed binding also supports environment overrides for the remaining `demo-pro` fields. The keys in YAML are fake, local-only credentials. Production keys should be provisioned from environment/secret-manager sources, stored or compared using an appropriate secret-handling design, rotated, and never committed.
 
