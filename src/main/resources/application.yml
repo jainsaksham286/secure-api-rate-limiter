@@ -2,6 +2,22 @@ spring:
   application:
     name: secure-api-rate-limiter
 
+app:
+  security:
+    admin-key: ${DEMO_ADMIN_KEY:fake-admin-key-123}
+  rate-limit:
+    clients:
+      demo-free:
+        client-id: demo-free
+        api-key: ${DEMO_FREE_API_KEY:demo-key-free-123}
+        capacity: 5
+        refill-tokens-per-second: 1.0
+      demo-pro:
+        client-id: demo-pro
+        api-key: ${DEMO_PRO_API_KEY:demo-key-pro-456}
+        capacity: 20
+        refill-tokens-per-second: 5.0
+
 management:
   endpoints:
     web:

@@ -47,6 +47,16 @@ public final class TokenBucket {
         }
     }
 
+    public int currentRemainingTokens() {
+        lock.lock();
+        try {
+            refill(timeSource.nanoTime());
+            return Math.min(capacity, (int) Math.floor(tokens + ROUNDING_EPSILON));
+        } finally {
+            lock.unlock();
+        }
+    }
+
     private void refill(long nowNanos) {
         long elapsedNanos = nowNanos - lastRefillNanos;
         if (elapsedNanos > 0 && tokens < capacity) {
