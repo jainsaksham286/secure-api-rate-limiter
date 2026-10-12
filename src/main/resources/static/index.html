@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>Traffic Monitor | Secure API</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Secure API traffic monitor home">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span>SECURE API <b>／</b> TRAFFIC MONITOR</span>
+    </a>
+    <div class="topbar-meta">
+      <span class="live-indicator"><span></span> LOCAL INSTANCE</span>
+      <span id="last-updated" class="muted">Not updated yet</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">OPERATIONS / API GATEWAY</p>
+        <h1 id="page-title">Traffic overview</h1>
+      </div>
+      <div class="toolbar">
+        <label class="refresh-toggle">
+          <input id="auto-refresh" type="checkbox" checked>
+          <span>Auto refresh</span>
+        </label>
+        <button id="refresh-button" class="button button-quiet" type="button" aria-label="Refresh dashboard">
+          <span aria-hidden="true">↻</span> Refresh
+        </button>
+      </div>
+    </section>
+
+    <section class="access-strip" aria-label="Monitoring access">
+      <form id="admin-form" class="admin-form">
+        <label for="admin-key">Admin key</label>
+        <input id="admin-key" name="admin-key" type="password" autocomplete="current-password"
+          placeholder="Enter monitoring key" aria-describedby="admin-help">
+        <button class="button button-primary" type="submit">Connect</button>
+        <span id="admin-help" class="sr-only">The key stays in this browser session and is sent only to monitoring endpoints.</span>
+      </form>
+      <p id="connection-status" class="connection-status" role="status" aria-live="polite">Enter the admin key to load monitoring data.</p>
+    </section>
+
+    <p id="dashboard-error" class="error-banner" role="alert" hidden></p>
+
+    <section class="metrics" aria-label="Request summary">
+      <article class="metric metric-total">
+        <p>Total requests</p><strong id="metric-total">—</strong><span>since process start</span>
+      </article>
+      <article class="metric metric-accepted">
+        <p>Accepted</p><strong id="metric-accepted">—</strong><span>requests served</span>
+      </article>
+      <article class="metric metric-rejected">
+        <p>Rejected</p><strong id="metric-rejected">—</strong><span>auth + rate limit</span>
+      </article>
+      <article class="metric metric-rate">
+        <p>Rejection rate</p><strong id="metric-rate">—</strong><span>of total requests</span>
+      </article>
+      <article class="metric metric-clients">
+        <p>Active clients</p><strong id="metric-clients">—</strong><span>seen since startup</span>
+      </article>
+      <article class="metric metric-uptime">
+        <p>Uptime</p><strong id="metric-uptime">—</strong><span>current process</span>
+      </article>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel chart-panel" aria-labelledby="chart-title">
+        <div class="panel-heading">
+          <div><p class="eyebrow">LAST FIVE MINUTES</p><h2 id="chart-title">Request volume</h2></div>
+          <div class="chart-legend" aria-label="Chart legend">
+            <span><i class="legend-accepted"></i>Accepted</span>
+            <span><i class="legend-rejected"></i>Rejected</span>
+          </div>
+        </div>
+        <canvas id="traffic-chart" height="230" role="img" aria-label="Accepted and rejected requests over time">
+          Request volume chart. Use the summary cards for totals.
+        </canvas>
+        <div class="chart-footer">
+          <span>5-second buckets</span>
+          <span id="traffic-ratio">Accepted / rejected: —</span>
+        </div>
+      </article>
+
+      <article class="panel demo-panel" aria-labelledby="demo-title">
+        <div class="panel-heading">
+          <div><p class="eyebrow">LIVE REQUESTS</p><h2 id="demo-title">Try the limiter</h2></div>
+          <span class="demo-badge">DEMO</span>
+        </div>
+        <label for="demo-tier">Client profile</label>
+        <select id="demo-tier">
+          <option value="free">Free · capacity 5</option>
+          <option value="pro">Pro · capacity 20</option>
+        </select>
+        <div class="button-row">
+          <button id="send-one" class="button button-primary" type="button">Send request</button>
+          <button id="send-burst" class="button button-outline" type="button">Send burst of 20</button>
+        </div>
+        <div id="demo-result" class="demo-result" role="status" aria-live="polite">
+          <span class="result-mark" aria-hidden="true">›</span>
+          <span>Select a profile to send a demo request.</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel clients-panel" aria-labelledby="clients-title">
+      <div class="panel-heading">
+        <div><p class="eyebrow">TENANT BREAKDOWN</p><h2 id="clients-title">Client activity</h2></div>
+        <span id="client-count" class="subtle-count">— clients</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Client</th><th scope="col">Requests</th><th scope="col">Accepted</th><th scope="col">Rejected</th><th scope="col">Rejection rate</th><th scope="col">Tokens</th><th scope="col">Last request</th></tr>
+          </thead>
+          <tbody id="client-rows">
+            <tr><td class="table-message" colspan="7">Connect with an admin key to view client activity.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span>IN-MEMORY TELEMETRY</span><span>State resets when the server restarts</span></footer>
+</body>
+</html>
