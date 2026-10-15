@@ -26,8 +26,8 @@ public class DemoController {
 
     @GetMapping("/api/demo/data")
     public DemoData data(HttpServletRequest request) {
-        RateLimiterService.ClientBucket client =
-                (RateLimiterService.ClientBucket) request.getAttribute(ApiSecurityFilter.CLIENT_ATTRIBUTE);
+        RateLimiterService.ClientBucket client = (RateLimiterService.ClientBucket) request
+                .getAttribute(ApiSecurityFilter.CLIENT_ATTRIBUTE);
         BucketDecision decision = (BucketDecision) request.getAttribute(ApiSecurityFilter.DECISION_ATTRIBUTE);
         return new DemoData(Instant.now(), client.clientId(), decision.remainingTokens(),
                 Map.of("recordId", "sample-001", "classification", "demo", "message", "Protected sample data"));

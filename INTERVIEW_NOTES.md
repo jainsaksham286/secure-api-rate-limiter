@@ -67,7 +67,7 @@ I kept the project deliberately local and explainable: configured demo clients, 
 
 ## Resume Bullets
 
-- Implemented a Java 17/Spring Boot token-bucket API limiter with per-client configuration, atomic bucket updates, monotonic refill, and rate-limit response headers.
+- Implemented a Java 25/Spring Boot token-bucket API limiter with per-client configuration, atomic bucket updates, monotonic refill, and rate-limit response headers.
 - Added admin-protected traffic monitoring with bounded time-series storage, aggregate invalid-key accounting, and secret-free client statistics.
 - Verified token refill, edge cases, and a 200-task concurrency race with a fake clock; `mvnw.cmd clean verify` passed 7 tests.
 - Built a responsive vanilla-JavaScript dashboard with auto-refresh, Canvas traffic chart, and a live 20-request rate-limit demonstration.

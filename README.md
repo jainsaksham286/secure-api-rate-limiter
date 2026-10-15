@@ -1,6 +1,6 @@
 # Secure API Rate Limiter and Traffic Monitor
 
-A small Java 17/Spring Boot application demonstrating API-key authentication, a concurrency-safe token bucket, bounded traffic statistics, and a local monitoring dashboard. It is an interview/learning project, not production security infrastructure.
+A small Java 25/Spring Boot application demonstrating API-key authentication, a concurrency-safe token bucket, bounded traffic statistics, and a local monitoring dashboard. It is an interview/learning project, not production security infrastructure.
 
 ## Features
 
@@ -48,7 +48,7 @@ The `demo-free` profile starts with 5 tokens and refills at 1 token/second. A bu
 
 ## Prerequisites and Commands
 
-Java 17 is required. Maven is not required; the checked-in wrapper downloads Maven 3.9.11 on first use. Run these commands in PowerShell from the repository root:
+Java 25 is required. Maven is not required; the checked-in wrapper downloads Maven 3.9.11 on first use. Run these commands in PowerShell from the repository root:
 
 ```powershell
 .\mvnw.cmd clean verify
@@ -62,7 +62,7 @@ Open `http://localhost:8080`. To run the packaged application instead:
 java -jar .\target\secure-api-rate-limiter-1.0.0.jar
 ```
 
-The CI equivalent is `./mvnw -B verify` on Java 17. `target/` is ignored by Git.
+The CI equivalent is `./mvnw -B verify` on Java 25. `target/` is ignored by Git.
 
 ## Endpoints
 

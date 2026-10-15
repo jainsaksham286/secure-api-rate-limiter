@@ -4,7 +4,10 @@ import com.example.ratelimiter.model.BucketDecision;
 import com.example.ratelimiter.util.TimeSource;
 import java.util.concurrent.locks.ReentrantLock;
 
-/** A per-client token bucket; one lock makes refill and token consumption a single atomic operation. */
+/**
+ * A per-client token bucket; one lock makes refill and token consumption a
+ * single atomic operation.
+ */
 public final class TokenBucket {
     private static final double NANOS_PER_SECOND = 1_000_000_000.0;
     private static final double ROUNDING_EPSILON = 1.0e-12;
