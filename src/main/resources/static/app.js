@@ -123,15 +123,19 @@ function renderClients(clients) {
     row.append(rateCell);
 
     const tokenCell = document.createElement("td");
-    const tokenTrack = document.createElement("span");
-    tokenTrack.className = "token-track";
-    const tokenFill = document.createElement("span");
-    const capacity = client.clientId === "demo-pro" ? 20 : client.clientId === "demo-free" ? 5 : 1;
-    const remaining = Math.max(0, Number(client.currentTokensRemaining || 0));
-    tokenFill.className = "token-fill";
-    tokenFill.style.width = `${Math.min(100, remaining / capacity * 100)}%`;
-    tokenTrack.append(tokenFill);
-    tokenCell.append(tokenTrack, document.createTextNode(`${remaining} / ${capacity}`));
+    if (client.clientId === "public") {
+      tokenCell.textContent = "Unlimited";
+    } else {
+      const tokenTrack = document.createElement("span");
+      tokenTrack.className = "token-track";
+      const tokenFill = document.createElement("span");
+      const capacity = client.clientId === "demo-pro" ? 20 : 5;
+      const remaining = Math.max(0, Number(client.currentTokensRemaining || 0));
+      tokenFill.className = "token-fill";
+      tokenFill.style.width = `${Math.min(100, remaining / capacity * 100)}%`;
+      tokenTrack.append(tokenFill);
+      tokenCell.append(tokenTrack, document.createTextNode(`${remaining} / ${capacity}`));
+    }
     row.append(tokenCell);
     appendCell(row, client.lastRequestTime ? new Date(client.lastRequestTime).toLocaleTimeString() : "—");
     clientRows.append(row);

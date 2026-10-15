@@ -14,7 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.LongAdder;
 import org.springframework.stereotype.Service;
 
-/** Tracks bounded aggregate and configured-client statistics without retaining unknown API keys. */
+/**
+ * Tracks bounded aggregate and configured-client statistics without retaining
+ * unknown API keys.
+ */
 @Service
 public class StatsService {
     private static final long BUCKET_NANOS = 5_000_000_000L;

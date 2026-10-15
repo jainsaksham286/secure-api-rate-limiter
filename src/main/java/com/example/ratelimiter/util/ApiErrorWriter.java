@@ -18,7 +18,8 @@ public class ApiErrorWriter {
         this.objectMapper = objectMapper;
     }
 
-    public void write(HttpServletRequest request, HttpServletResponse response, int status, String error, String message)
+    public void write(HttpServletRequest request, HttpServletResponse response, int status, String error,
+            String message)
             throws IOException {
         String requestId = (String) request.getAttribute(RequestIdFilter.REQUEST_ID_ATTRIBUTE);
         response.setStatus(status);
